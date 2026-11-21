@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.pytest_cache/
+database/*.db
+logs/*.log
+reports/*
+!reports/.gitkeep
+ml_models/*.joblib
+data/raw/*.csv
+data/processed/*.csv

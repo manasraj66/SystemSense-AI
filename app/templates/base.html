@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080d18">
+  <title>{% block title %}SystemSense AI{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="ambient ambient-one"></div><div class="ambient ambient-two"></div><div class="ambient-grid"></div>
+<div class="layout">
+  <aside>
+    <a class="brand" href="/dashboard"><span class="brand-mark">S</span><div><b>SystemSense</b><small>AI MONITORING</small></div></a>
+    <p class="navtitle">WORKSPACE</p>
+    <nav>
+      <a class="{{ 'active' if request.path == '/dashboard' else '' }}" href="/dashboard"><span class="nav-icon">▦</span>Dashboard</a>
+      <a class="{{ 'active' if request.path == '/monitor' else '' }}" href="/monitor"><span class="nav-icon">◉</span>Live monitor</a>
+      <a class="{{ 'active' if request.path == '/analyze' else '' }}" href="/analyze"><span class="nav-icon">⌁</span>Anomaly analysis</a>
+      <a class="{{ 'active' if request.path == '/predict' else '' }}" href="/predict"><span class="nav-icon">↗</span>Prediction lab</a>
+      <a class="{{ 'active' if request.path == '/processes' else '' }}" href="/processes"><span class="nav-icon">▤</span>Processes</a>
+      <a class="{{ 'active' if request.path == '/history' else '' }}" href="/history"><span class="nav-icon">◷</span>History</a>
+      <a class="{{ 'active' if request.path == '/alerts' else '' }}" href="/alerts"><span class="nav-icon">♢</span>Alerts</a>
+      <a class="{{ 'active' if request.path == '/reports' else '' }}" href="/reports"><span class="nav-icon">▧</span>Reports</a>
+    </nav>
+    <div class="sidebar-bottom"><div class="connection"><i></i><span><b>Local machine</b><small>Connected securely</small></span><em>●</em></div><div class="sidebar-version">SYSTEMSENSE AI <span>v1.0</span></div></div>
+  </aside>
+  <main>
+    <header><div><small class="eyebrow">SYSTEM INTELLIGENCE <span>/</span> OVERVIEW</small><h1>{% block heading %}System dashboard{% endblock %}</h1></div><div class="header-right"><span class="live"><i></i> LIVE SYSTEM</span><span class="header-clock">LOCAL TELEMETRY</span></div></header>
+    <section>{% block content %}{% endblock %}</section>
+    <footer><span>SystemSense AI</span> · Local telemetry · Predictive insights <span class="footer-right">BUILT FOR SYSTEM VISIBILITY</span></footer>
+  </main>
+</div>
+<script src="{{ url_for('static',filename='js/utils.js') }}"></script>{% block scripts %}{% endblock %}
+</body></html>

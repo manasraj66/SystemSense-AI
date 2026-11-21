@@ -1,0 +1,1 @@
+def percent(value):\n    return f"{float(value):.1f}%"\n

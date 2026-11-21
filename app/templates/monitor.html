@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block heading %}Live monitor{% endblock %}{% block content %}
+<div class="welcome"><div><small>SYSTEMSENSE MODULE</small><h2>Live monitor</h2><p>Track the machine's resource measurements as new telemetry arrives.</p></div></div><article class="panel"><small>MODULE DATA</small><h3>Live monitor</h3><div id="output" class="output">Loading…</div></article>
+{% endblock %}{% block scripts %}<script>
+async function loadData(){
+ const response=await fetch('/api/metrics'); const data=await response.json();
+ const out=document.getElementById('output');
+ if(!data.length){out.textContent='No data yet. Keep the dashboard open to collect samples.';return;}
+ let headers, rows;
+ if('metrics'==='processes'){headers=['PID','Process','User','CPU','Memory','Status'];rows=data.map(x=>[x.pid,x.name,x.username,x.cpu_percent+'%',x.memory_percent+'%',x.status]);}
+ else if('metrics'==='anomalies'){headers=['Time','Metric','Value','Severity','Description'];rows=data.map(x=>[new Date(x.timestamp).toLocaleString(),x.metric,x.value+'%',x.severity,x.description]);}
+ else {headers=['Time','CPU','Memory','Disk','Processes'];rows=data.map(x=>[new Date(x.timestamp).toLocaleString(),x.cpu+'%',x.memory+'%',x.disk+'%',x.process_count]);}
+ out.innerHTML='<div class="tablebox"><table><thead><tr>'+headers.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+}
+loadData();setInterval(loadData,10000);
+</script>{% endblock %}

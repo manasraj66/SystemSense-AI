@@ -1,0 +1,1 @@
+SEVERITIES = ("info", "warning", "critical")\nMETRIC_NAMES = ("cpu_percent", "memory_percent", "disk_percent")\n

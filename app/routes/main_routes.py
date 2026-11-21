@@ -1,0 +1,22 @@
+from flask import Blueprint, render_template
+from app.models import Alert
+bp = Blueprint("main", __name__)
+@bp.get("/")
+@bp.get("/dashboard")
+def dashboard(): return render_template("dashboard.html")
+@bp.get("/monitor")
+def monitor(): return render_template("monitor.html")
+@bp.get("/analyze")
+def analyze(): return render_template("analyze.html")
+@bp.get("/predict")
+def predict(): return render_template("predict.html")
+@bp.get("/processes")
+def processes(): return render_template("processes.html")
+@bp.get("/history")
+def history(): return render_template("history.html")
+@bp.get("/reports")
+def reports(): return render_template("reports.html")
+@bp.get("/alerts")
+def alerts():
+    rows = Alert.query.order_by(Alert.created_at.desc()).limit(100).all()
+    return render_template("alerts.html", alerts=rows)

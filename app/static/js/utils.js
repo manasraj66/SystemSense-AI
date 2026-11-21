@@ -1,0 +1,1 @@
+async function collectNow(){const b=event.currentTarget;b.disabled=true;b.textContent='Collecting…';try{await fetch('/api/metrics/collect',{method:'POST'});if(window.refreshDashboard)await refreshDashboard();}catch(e){alert('Collection failed. Check the server console.');}finally{b.disabled=false;b.textContent='＋ Collect snapshot';}}

@@ -1,0 +1,1 @@
+// Page behavior is loaded by the matching template.
